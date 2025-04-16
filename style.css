@@ -1,0 +1,99 @@
+header {
+    height: 4vh;
+    width: 100%;
+    top: 0 auto;
+    text-align: center;
+    color: #fff;
+    background-color: #ce9661;
+    border-bottom: #9e6c39 dashed 3px;
+}
+
+body {
+    height: 90vh;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #FFC38C;
+}
+
+footer {
+    height: 6vh;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    border-top: #9e6c39 dashed 3px;
+    background-color: #ce9661;
+    color: #fff;
+
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    margin-top: 5vh;
+    width: 60vh;
+    height: 60vh;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+}
+
+#content {
+    width: 60%;
+    height: 100%;
+    margin-left: 20%;
+    background-image: url("https://img17.demotywatoryfb.pl//uploads/201410/1412636355_jghb0m_600.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#selectBar {
+    width: 100%;
+    height: 20%;
+    position: relative;
+    top: 80%;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#selectBar>div {
+    color: white
+}
+
+.choiceButton {
+    border-radius: 100%;
+    width: 20%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(200, 20, 20, 0.4);
+}
+
+#report {
+    border-radius: 100%;
+    width: 15%;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(200, 20, 20, 0.4);
+
+}
+
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 0;
+}
