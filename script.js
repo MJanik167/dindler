@@ -1,9 +1,11 @@
+import ContentCard from "./ContentCard.js";
+
 const containerWidth = 60
 const containerHeight = 60
 let choiceAccepted;
 
 
-sliderHover = () => {
+let sliderHover = () => {
     if (!contentActive) {
         document.addEventListener('mousemove', mouseListener)
         document.addEventListener('click', clickListener)
@@ -11,10 +13,9 @@ sliderHover = () => {
     }
     slider.removeEventListener('mouseover', sliderHover);
     console.log("hover")
-    width = slider.style.width
-    width = containerWidth
-    height = containerHeight
-    animationFrame = () => {
+    let width = containerWidth
+    let height = containerHeight
+    let animationFrame = () => {
         width -= 0.5
         height -= 0.5
         container.style.width = `${width}vh`
@@ -36,32 +37,36 @@ sliderHover = () => {
     }
 }
 
-mouseListener = (event) => {
-    cursorPosition = (window.innerWidth / 2 - event.clientX) / (window.innerWidth)
-    offset = 20 + cursorPosition * 40
+let mouseListener = (event) => {
+    let cursorPosition = (window.innerWidth / 2 - event.clientX) / (window.innerWidth)
+    let offset = 20 + cursorPosition * 40
     if (cursorPosition > 0) {
         choiceAccepted = true
     } else {
         choiceAccepted = false
     }
     console.log(choiceAccepted)
-    angle = cursorPosition * 15
+    let angle = cursorPosition * 15
     slider.style.marginLeft = `${offset}%`
     slider.style.rotate = `${angle}deg`
 }
 
-clickListener = (event) => {
+let clickListener = (event) => {
     if (contentActive) {
         document.removeEventListener('mousemove', mouseListener)
         document.removeEventListener('click', clickListener)
         slider.addEventListener('mouseover', sliderHover);
+        content.release()
         contentActive = false
     }
 }
 
-cursorPosition = 0
-container = document.getElementById('container')
-slider = document.getElementById('content')
+
+let container = document.getElementById('container')
+let content = new ContentCard('https://example.com/content')
+container.innerHTML = content.getHTML()
+let slider = document.getElementById('content')
+console.log(slider)
 slider.addEventListener('mouseover', sliderHover);
 let contentActive = false
 console.log(window.innerWidth)
