@@ -12,6 +12,7 @@ export default class ContentCard {
                     <div id="yes" class="choiceButton"> yes </div>
                 </div>
                 `
+        console.log(this.container.getBoundingClientRect())
     }
 
     async fetchContent() {
@@ -27,12 +28,24 @@ export default class ContentCard {
         }
     }
 
+    update(event) {
+        let cursorPosition = (window.innerWidth / 2 - event.clientX) / (window.innerWidth)
+        let offset = 20 + cursorPosition * 100
+        // if (cursorPosition > 0) {
+        //     choiceAccepted = true
+        // } else {
+        //     choiceAccepted = false
+        // }
+        let angle = cursorPosition * 15
+        this.container.style.marginLeft = `${offset}%`
+        this.container.style.rotate = `${angle}deg`
+    }
+
     release() {
         new ContentDisposed(this.container)
-        this.container.remove()
     }
 
     getHTML() {
-        return this.container.outerHTML
+        return this.container
     }
 }

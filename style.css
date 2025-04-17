@@ -39,14 +39,15 @@ footer {
     height: 60vh;
     display: flex;
     justify-content: left;
-    align-items: left;
+    align-items: center;
     flex-direction: column;
 }
 
 #content {
-    width: 60%;
-    height: 100%;
+    width: 36vh;
+    height: 60vh;
     margin-left: 20%;
+    animation: fadeIn 0.4s ease-in forwards;
     background-image: url("https://img17.demotywatoryfb.pl//uploads/201410/1412636355_jghb0m_600.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -96,4 +97,25 @@ img {
     height: 100%;
     object-fit: fill;
     z-index: 0;
+}
+
+.contentDisposed {
+    position: absolute;
+    width: 12vh;
+    height: 20vh;
+    background-image: url("https://img17.demotywatoryfb.pl//uploads/201410/1412636355_jghb0m_600.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -1,6 +1,6 @@
 import ContentCard from "./ContentCard.js";
 
-const containerWidth = 60
+const containerWidth = 36
 const containerHeight = 60
 let choiceAccepted;
 
@@ -11,21 +11,20 @@ let sliderHover = () => {
         document.addEventListener('click', clickListener)
         contentActive = true
     }
-    slider.removeEventListener('mouseover', sliderHover);
+    content.getHTML().removeEventListener('mouseover', sliderHover);
     console.log("hover")
     let width = containerWidth
     let height = containerHeight
     let animationFrame = () => {
-        width -= 0.5
-        height -= 0.5
-        container.style.width = `${width}vh`
-        container.style.height = `${height}vh`
-        if (width >= 40) {
+        width -= containerWidth / 100
+        height -= containerHeight / 100
+        content.getHTML().style.width = `${width}vh`
+        content.getHTML().style.height = `${height}vh`
+        if (height >= 40) {
             requestAnimationFrame(animationFrame)
         } else {
-            container.style.width = `${40}vh`
-            container.style.height = `${40}vh`
-
+            content.getHTML().style.width = `${24}vh`
+            content.getHTML().style.height = `${40}vh`
         }
     }
     requestAnimationFrame(animationFrame)
@@ -38,25 +37,22 @@ let sliderHover = () => {
 }
 
 let mouseListener = (event) => {
-    let cursorPosition = (window.innerWidth / 2 - event.clientX) / (window.innerWidth)
-    let offset = 20 + cursorPosition * 40
-    if (cursorPosition > 0) {
-        choiceAccepted = true
-    } else {
-        choiceAccepted = false
-    }
-    console.log(choiceAccepted)
-    let angle = cursorPosition * 15
-    slider.style.marginLeft = `${offset}%`
-    slider.style.rotate = `${angle}deg`
+    content.update(event)
 }
 
 let clickListener = (event) => {
     if (contentActive) {
         document.removeEventListener('mousemove', mouseListener)
         document.removeEventListener('click', clickListener)
-        slider.addEventListener('mouseover', sliderHover);
         content.release()
+        disposed.push(content)
+
+        content = new ContentCard('https://example.com/content')
+        container.style.width = `${containerWidth}vh`
+        container.style.height = `${containerHeight}vh`
+        container.appendChild(content.getHTML())
+        content.getHTML().addEventListener('mouseover', sliderHover);
+
         contentActive = false
     }
 }
@@ -64,9 +60,22 @@ let clickListener = (event) => {
 
 let container = document.getElementById('container')
 let content = new ContentCard('https://example.com/content')
-container.innerHTML = content.getHTML()
-let slider = document.getElementById('content')
-console.log(slider)
-slider.addEventListener('mouseover', sliderHover);
+container.appendChild(content.getHTML())
+
+let sldier = document.getElementById('content')
+content.getHTML().addEventListener('mouseover', sliderHover);
+
 let contentActive = false
-console.log(window.innerWidth)
+
+let disposed = []
+
+const frame = () => {
+    content.update()
+    container.innerHTML = content.getHTML()
+    disposed.forEach(disposedCard => {
+        disposedCard.update()
+    });
+    console.log("animation")
+    requestAnimationFrame(frame)
+}
+requestAnimationFrame(frame)
