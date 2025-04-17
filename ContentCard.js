@@ -1,6 +1,7 @@
 import ContentDisposed from "./ContentDisposed.js";
 
 export default class ContentCard {
+    container
     constructor(url) {
         this.url = url;
         this.container = document.createElement('div')
@@ -13,19 +14,27 @@ export default class ContentCard {
                 </div>
                 `
         console.log(this.container.getBoundingClientRect())
+        this.fetchContent(this.container)
     }
 
-    async fetchContent() {
-        try {
-            const response = await fetch(this.url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return await response.text();
-        } catch (error) {
-            console.error('Error fetching content:', error);
-            return null;
+    async fetchContent(container) {
+        var request = new XMLHttpRequest();
+
+        request.open('GET', 'https://meme-api.com/gimme');
+
+        request.setRequestHeader('Accept', 'application/json');
+
+        request.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            console.log('Status:', this.status);
+            console.log('Headers:', this.getAllResponseHeaders());
+            console.log('Body:', this.responseText);
+            console.log()
+            container.style.backgroundImage = `url(${JSON.parse(this.responseText).url})`;
         }
+    };
+
+        request.send();
     }
 
     update(event) {
