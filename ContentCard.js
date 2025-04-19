@@ -2,7 +2,7 @@ import ContentDisposed from "./ContentDisposed.js";
 
 export default class ContentCard {
     container
-    constructor(url) {
+    constructor() {
         this.container = document.createElement('div')
         this.container.id = "content"
         this.container.innerHTML = `
@@ -12,7 +12,6 @@ export default class ContentCard {
                     <div id="yes" class="choiceButton"> yes </div>
                 </div>
                 `
-        this.setConent(url)
     }
 
     async setConent(url) {

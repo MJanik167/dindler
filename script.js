@@ -40,7 +40,7 @@ let mouseListener = (event) => {
     content.update(event)
 }
 
-let clickListener = (event) => {
+async function clickListener(event) {
     if (contentActive) {
         document.removeEventListener('mousemove', mouseListener)
         document.removeEventListener('click', clickListener)
@@ -48,9 +48,10 @@ let clickListener = (event) => {
         disposed.push(disposedCard)
         console.log(disposed)
 
-        content = new ContentCard('https://meme-api.com/gimme')
+        content = new ContentCard()
         container.style.width = `${containerWidth}vh`
         container.style.height = `${containerHeight}vh`
+        await content.setConent('https://meme-api.com/gimme')
         container.appendChild(content.getHTML())
         content.getHTML().addEventListener('mouseover', sliderHover);
 
@@ -64,7 +65,8 @@ let contentActive = false
 let disposed = []
 
 let container = document.getElementById('container')
-let content = new ContentCard('https://meme-api.com/gimme')
+let content = new ContentCard()
+await content.setConent('https://meme-api.com/gimme')
 container.appendChild(content.getHTML());
 
 content.getHTML().addEventListener('mouseover', sliderHover);
