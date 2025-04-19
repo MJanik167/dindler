@@ -3,7 +3,6 @@ import ContentDisposed from "./ContentDisposed.js";
 export default class ContentCard {
     container
     constructor(url) {
-        this.url = url;
         this.container = document.createElement('div')
         this.container.id = "content"
         this.container.innerHTML = `
@@ -13,24 +12,32 @@ export default class ContentCard {
                     <div id="yes" class="choiceButton"> yes </div>
                 </div>
                 `
-        console.log(this.container.getBoundingClientRect())
-        this.fetchContent(this.container)
+        this.setConent(url)
     }
 
-    async fetchContent(container) {
-        var request = new XMLHttpRequest();
+    async setConent(url) {
+        this.container.classList.add('loading')
+        this.container.style.backgroundImage = await this.fetchContent(url);
+        this.container.classList.remove('loading')
+    }
 
-        request.open('GET', 'https://meme-api.com/gimme');
+    fetchContent(url) {
+        return new Promise((resolve, reject) => {
+            var request = new XMLHttpRequest();
 
-        request.setRequestHeader('Accept', 'application/json');
+            request.open('GET', url);
 
-        request.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                container.style.backgroundImage = `url(${JSON.parse(this.responseText).url})`;
-            }
-        };
+            request.setRequestHeader('Accept', 'application/json');
 
-        request.send();
+            request.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    return resolve(`url(${JSON.parse(this.responseText).url})`)
+                }
+            };
+
+            request.send();
+        })
+
     }
 
     update(event) {

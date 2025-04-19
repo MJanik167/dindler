@@ -48,7 +48,7 @@ let clickListener = (event) => {
         disposed.push(disposedCard)
         console.log(disposed)
 
-        content = new ContentCard('https://example.com/content')
+        content = new ContentCard('https://meme-api.com/gimme')
         container.style.width = `${containerWidth}vh`
         container.style.height = `${containerHeight}vh`
         container.appendChild(content.getHTML())
@@ -64,7 +64,7 @@ let contentActive = false
 let disposed = []
 
 let container = document.getElementById('container')
-let content = new ContentCard('https://example.com/content')
+let content = new ContentCard('https://meme-api.com/gimme')
 container.appendChild(content.getHTML());
 
 content.getHTML().addEventListener('mouseover', sliderHover);
