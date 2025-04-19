@@ -38,7 +38,7 @@ footer {
     width: 60vh;
     height: 60vh;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -46,7 +46,7 @@ footer {
 #content {
     width: 36vh;
     height: 60vh;
-    margin-left: 20%;
+    margin-left: 0%;
     animation: fadeIn 0.4s ease-in forwards;
     background-image: url("https://img17.demotywatoryfb.pl//uploads/201410/1412636355_jghb0m_600.jpg");
     background-size: cover;
@@ -88,7 +88,6 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: rgba(200, 20, 20, 0.4);
-
 }
 
 

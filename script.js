@@ -44,8 +44,9 @@ let clickListener = (event) => {
     if (contentActive) {
         document.removeEventListener('mousemove', mouseListener)
         document.removeEventListener('click', clickListener)
-        content.release()
-        disposed.push(content)
+        let disposedCard = content.release(event.clientX - window.innerWidth / 2)
+        disposed.push(disposedCard)
+        console.log(disposed)
 
         content = new ContentCard('https://example.com/content')
         container.style.width = `${containerWidth}vh`
@@ -58,24 +59,25 @@ let clickListener = (event) => {
 }
 
 
-let container = document.getElementById('container')
-let content = new ContentCard('https://example.com/content')
-container.appendChild(content.getHTML())
-
-let sldier = document.getElementById('content')
-content.getHTML().addEventListener('mouseover', sliderHover);
-
 let contentActive = false
 
 let disposed = []
 
+let container = document.getElementById('container')
+let content = new ContentCard('https://example.com/content')
+container.appendChild(content.getHTML());
+
+content.getHTML().addEventListener('mouseover', sliderHover);
+console.log("aaaa")
+
 const frame = () => {
-    content.update()
-    container.innerHTML = content.getHTML()
     disposed.forEach(disposedCard => {
         disposedCard.update()
     });
-    console.log("animation")
     requestAnimationFrame(frame)
+
 }
+
 requestAnimationFrame(frame)
+
+

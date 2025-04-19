@@ -25,21 +25,17 @@ export default class ContentCard {
         request.setRequestHeader('Accept', 'application/json');
 
         request.onreadystatechange = function () {
-        if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.responseText);
-            console.log()
-            container.style.backgroundImage = `url(${JSON.parse(this.responseText).url})`;
-        }
-    };
+            if (this.readyState === 4) {
+                container.style.backgroundImage = `url(${JSON.parse(this.responseText).url})`;
+            }
+        };
 
         request.send();
     }
 
     update(event) {
         let cursorPosition = (window.innerWidth / 2 - event.clientX) / (window.innerWidth)
-        let offset = 20 + cursorPosition * 100
+        let offset = cursorPosition * 100
         // if (cursorPosition > 0) {
         //     choiceAccepted = true
         // } else {
@@ -50,8 +46,15 @@ export default class ContentCard {
         this.container.style.rotate = `${angle}deg`
     }
 
-    release() {
-        new ContentDisposed(this.container)
+    release(cursorPosition) {
+        console.log(cursorPosition);
+
+        if (cursorPosition > 0) {
+            return new ContentDisposed(this.container, 1)
+        }
+        else {
+            return new ContentDisposed(this.container, -1)
+        }
     }
 
     getHTML() {
