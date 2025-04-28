@@ -3,6 +3,7 @@ import ContentCard from "./ContentCard.js";
 const containerWidth = 36
 const containerHeight = 60
 let choiceAccepted;
+let navbar = document.getElementById('navbar')
 
 
 let sliderHover = () => {
@@ -12,7 +13,6 @@ let sliderHover = () => {
         contentActive = true
     }
     content.getHTML().removeEventListener('mouseover', sliderHover);
-    console.log("hover")
     let width = containerWidth
     let height = containerHeight
     let animationFrame = () => {
@@ -38,6 +38,13 @@ let sliderHover = () => {
 
 let mouseListener = (event) => {
     content.update(event)
+    if (event.clientX < window.innerWidth * 0.1) {
+        navbar.classList.add('slideIn')
+        navbar.classList.remove('slideOut')
+    } else {
+        navbar.classList.remove('slideIn')
+        navbar.classList.add('slideOut')
+    }
 }
 
 async function clickListener(event) {
@@ -54,7 +61,6 @@ async function clickListener(event) {
         await content.setConent('https://meme-api.com/gimme')
         container.appendChild(content.getHTML())
         content.getHTML().addEventListener('mouseover', sliderHover);
-
         contentActive = false
     }
 }
@@ -63,7 +69,6 @@ async function clickListener(event) {
 let contentActive = false
 
 let disposed = []
-
 let container = document.getElementById('container')
 let content = new ContentCard()
 await content.setConent('https://meme-api.com/gimme')

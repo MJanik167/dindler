@@ -111,6 +111,64 @@ img {
     visibility: hidden;
 }
 
+#navbar {
+    position: absolute;
+    width: 20vw;
+    left: -20vw;
+    background-color: red;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+    padding-left: 1vw;
+}
+
+input {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    width: 20%;
+}
+
+.slideIn {
+    animation: slideIn 0.4s ease-in forwards;
+}
+
+.slideOut {
+    animation: slideOut 0.4s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        left: -20vw;
+    }
+
+    to {
+        left: 0;
+    }
+
+}
+
+@keyframes slideOut {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -20vw;
+    }
+
+}
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
