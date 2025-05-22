@@ -38,11 +38,14 @@ let sliderHover = () => {
 
 let mouseListener = (event) => {
     content.update(event)
-    if (event.clientX < window.innerWidth * 0.1) {
+    if (event.clientX < window.innerWidth * 0.15) {
         navbar.classList.add('slideIn')
+        document.removeEventListener('click', clickListener)
         navbar.classList.remove('slideOut')
+
     } else {
         navbar.classList.remove('slideIn')
+        document.addEventListener('click', clickListener)
         navbar.classList.add('slideOut')
     }
 }
